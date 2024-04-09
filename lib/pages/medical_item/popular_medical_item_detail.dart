@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:khoaluan_flutter/controller/cart_controller.dart';
 import 'package:khoaluan_flutter/controller/popular_product_controller.dart';
+import 'package:khoaluan_flutter/pages/cart/cart_page.dart';
 import 'package:khoaluan_flutter/pages/home/main_medical_item_page.dart';
 import 'package:khoaluan_flutter/routes/route_helper.dart';
 import 'package:khoaluan_flutter/utils/app_constants.dart';
@@ -70,9 +71,14 @@ class PopularMedicalItemDetail extends StatelessWidget {
                        Get.find<PopularProductController>().totalItems >= 1?
                           Positioned(
                             right:0, top:0,
-                            child: AppIcon(icon: Icons.circle, size: Dimensions.font20,
-                              iconColor: Colors.transparent,
-                              backgroundColor: AppColors.mainColor,),
+                            child: GestureDetector(
+                              onTap: (){
+                                Get.to(() => CartPage());
+                              },
+                              child: AppIcon(icon: Icons.circle, size: Dimensions.font20,
+                                iconColor: Colors.transparent,
+                                backgroundColor: AppColors.mainColor,),
+                            ),
                           ):
                               Container(),
                        Get.find<PopularProductController>().totalItems >= 1?

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:khoaluan_flutter/controller/cart_controller.dart';
 import 'package:khoaluan_flutter/data/repository/popular_product_repo.dart';
 import 'package:khoaluan_flutter/utils/colors.dart';
+import '../models/cart_model.dart';
 import '../models/products_model.dart';
 
 class PopularProductController extends GetxController {
@@ -49,6 +50,10 @@ class PopularProductController extends GetxController {
         backgroundColor: AppColors.mainColor,
         colorText: Colors.white,
       );
+      if(_inCartItems > 0){
+        _quantity = -_inCartItems;
+        return _quantity;
+      }
       return 0;
     } else if ((_inCartItems+quantity)>10){
       Get.snackbar("Item Count", "Đây là mức tối đa rồi!",
@@ -88,5 +93,9 @@ class PopularProductController extends GetxController {
 
   int get totalItems{
     return _cart.totalItems;
+  }
+
+  List<CartModel> get getItems {
+    return _cart.getItems;
   }
 }
