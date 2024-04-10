@@ -28,11 +28,11 @@ class BonusIcon extends StatelessWidget {
               SizedBox(width: Dimensions.width10/2,),
               BigText(text: popularProduct.inCartItems.toString(), size: Dimensions.height20,),
               SizedBox(width: Dimensions.width10/2,),
-            GestureDetector(
-                onTap: (){
-                  popularProduct.setQuantity(true);
-                },
-                child: Icon(Icons.add, color: AppColors.signColor, size: Dimensions.height15,)),
+              GestureDetector(
+                  onTap: (){
+                    popularProduct.setQuantity(true);
+                  },
+                  child: Icon(Icons.add, color: AppColors.signColor, size: Dimensions.height15,)),
           ],
         );
       }),

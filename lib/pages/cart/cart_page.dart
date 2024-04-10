@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:khoaluan_flutter/controller/cart_controller.dart';
 import 'package:khoaluan_flutter/pages/home/main_medical_item_page.dart';
+import 'package:khoaluan_flutter/routes/route_helper.dart';
 import 'package:khoaluan_flutter/utils/app_constants.dart';
 import 'package:khoaluan_flutter/utils/colors.dart';
 import 'package:khoaluan_flutter/utils/dimensions.dart';
@@ -35,7 +36,7 @@ class CartPage extends StatelessWidget {
                   SizedBox(width: Dimensions.width20*6,),
                   GestureDetector(
                     onTap: (){
-                      Get.to(() => MainMedicalItemPage());
+                      Get.toNamed(RouteHelper.getInitial());
                     },
                     child: AppIcon(icon: Icons.home_outlined,
                       iconColor: Colors.white,
@@ -60,8 +61,9 @@ class CartPage extends StatelessWidget {
                   context: context,
                   removeTop: true,
                   child: GetBuilder<CartController>(builder: (cartController){
+                    var _cartList = cartController.getItems;
                     return ListView.builder(
-                        itemCount: cartController.getItems.length,
+                        itemCount: _cartList.length,
                         itemBuilder: (_, index){
                           return Container(
                             width: double.maxFinite,
@@ -97,7 +99,30 @@ class CartPage extends StatelessWidget {
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               BigText(text: cartController.getItems[index].price.toString(), color: Colors.redAccent, size: Dimensions.font20,),
-                                              BonusIcon(),
+                                              Container(
+                                                padding: EdgeInsets.only(top: Dimensions.height10, bottom: Dimensions.height10, right: Dimensions.width20, left: Dimensions.width20,),
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(Dimensions.radius20),
+                                                  color: Colors.white,
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    GestureDetector(
+                                                        onTap: (){
+                                                          cartController.addItem(_cartList[index].product!, -1);
+                                                        },
+                                                        child: Icon(Icons.remove, color: AppColors.signColor, size: Dimensions.height15,)),
+                                                    SizedBox(width: Dimensions.width10/2,),
+                                                    BigText(text: _cartList[index].quantity.toString(), size: Dimensions.height20,),
+                                                    SizedBox(width: Dimensions.width10/2,),
+                                                    GestureDetector(
+                                                        onTap: (){
+                                                          cartController.addItem(_cartList[index].product!, 1);
+                                                        },
+                                                        child: Icon(Icons.add, color: AppColors.signColor, size: Dimensions.height15,)),
+                                                  ],
+                                                ),
+                                              )
                                             ],
                                           )
                                         ],

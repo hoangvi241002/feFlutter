@@ -26,6 +26,7 @@ class CartController extends GetxController {
           quantity: value.quantity!+quantity,
           isExist: true,
           time: DateTime.now().toString(),
+          product: product,
         );
       });
       if(totalQuantity<=0){
@@ -46,6 +47,7 @@ class CartController extends GetxController {
             quantity: quantity,
             isExist: true,
             time: DateTime.now().toString(),
+            product: product,
           );});
       } else {
         Get.snackbar("Item Count", "Bạn nên thêm ít nhất một sản phẩm",
@@ -54,6 +56,7 @@ class CartController extends GetxController {
         );
       }
     }
+    update();
   }
 
   bool existInCart(ProductModel product){
