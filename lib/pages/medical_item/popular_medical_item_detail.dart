@@ -67,7 +67,7 @@ class PopularMedicalItemDetail extends StatelessWidget {
                      }
                    },
                    child:
-                    AppIcon(icon: Icons.arrow_back_ios)),
+                    AppIcon(icon: Icons.arrow_back)),
 
                  GetBuilder<PopularProductController>(builder: (controller){
                    return GestureDetector(
@@ -83,7 +83,7 @@ class PopularMedicalItemDetail extends StatelessWidget {
                               right:0, top:0,
                                 child: AppIcon(icon: Icons.circle, size: Dimensions.font20,
                                   iconColor: Colors.transparent,
-                                  backgroundColor: AppColors.mainColor,),
+                                  backgroundColor: AppColors.main_Color,),
                             ):
                                 Container(),
                          Get.find<PopularProductController>().totalItems >= 1?
@@ -147,7 +147,7 @@ class PopularMedicalItemDetail extends StatelessWidget {
                 padding: EdgeInsets.only(top: Dimensions.height15, bottom: Dimensions.height15, right: Dimensions.width35, left: Dimensions.width35,),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimensions.radius20),
-                  color: AppColors.mainColor,
+                  color: AppColors.main_Color,
                 ),
                 child: GestureDetector(
                     onTap: (){

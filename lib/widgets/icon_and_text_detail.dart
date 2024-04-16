@@ -42,11 +42,11 @@ class IconAndTextDetail extends StatelessWidget {
 
             IconAndTextWidget(icon: Icons.location_on,
                 text: "1.7Km",
-                iconColor: AppColors.mainColor),
+                iconColor: AppColors.main_Color),
 
             IconAndTextWidget(icon: Icons.access_time_rounded,
                 text: "32min",
-                iconColor: AppColors.iconColor1),
+                iconColor: AppColors.iconColor3),
             // BonusIcon()
           ],
         )

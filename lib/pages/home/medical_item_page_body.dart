@@ -61,7 +61,7 @@ class _MedicalPageBodyState extends State<MedicalItemPageBody> {
                     return _buildPageItem(position, popularProducts.popularProductList[position]);
                   }),
           ):CircularProgressIndicator(
-            color: AppColors.mainColor,
+            color: AppColors.main_Color,
           );
         }),
         // dots
@@ -70,7 +70,7 @@ class _MedicalPageBodyState extends State<MedicalItemPageBody> {
             dotsCount: popularProducts.popularProductList.isEmpty?1:popularProducts.popularProductList.length,
             position: _currPageValue,
             decorator: DotsDecorator(
-              activeColor: AppColors.mainColor,
+              activeColor: AppColors.main_Color,
               size: const Size.square(9.0),
               activeSize: const Size(18.0, 9.0),
               activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
@@ -158,11 +158,11 @@ class _MedicalPageBodyState extends State<MedicalItemPageBody> {
 
                                           IconAndTextWidget(icon: Icons.location_on,
                                               text: "1.7Km",
-                                              iconColor: AppColors.mainColor),
+                                              iconColor: AppColors.main_Color),
 
                                           IconAndTextWidget(icon: Icons.access_time_rounded,
                                               text: "32min",
-                                              iconColor: AppColors.iconColor1),
+                                              iconColor: AppColors.iconColor3),
                                         ],
                                       ),
                                   ],
@@ -175,7 +175,7 @@ class _MedicalPageBodyState extends State<MedicalItemPageBody> {
                     ),
                 );
               }):CircularProgressIndicator(
-            color: AppColors.mainColor,
+            color: AppColors.main_Color,
           );
         })
 

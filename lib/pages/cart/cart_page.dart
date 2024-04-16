@@ -30,9 +30,9 @@ class CartPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  AppIcon(icon: Icons.arrow_back_ios,
+                  AppIcon(icon: Icons.arrow_back,
                   iconColor: Colors.white,
-                    backgroundColor: AppColors.mainColor,
+                    backgroundColor: AppColors.main_Color,
                     iconSize: Dimensions.font20,
                   ),
                   SizedBox(width: Dimensions.width20*6,),
@@ -42,13 +42,13 @@ class CartPage extends StatelessWidget {
                     },
                     child: AppIcon(icon: Icons.home_outlined,
                       iconColor: Colors.white,
-                      backgroundColor: AppColors.mainColor,
+                      backgroundColor: AppColors.main_Color,
                       iconSize: Dimensions.font20,
                     ),
                   ),
                   AppIcon(icon: Icons.shopping_cart,
                     iconColor: Colors.white,
-                    backgroundColor: AppColors.mainColor,
+                    backgroundColor: AppColors.main_Color,
                     iconSize: Dimensions.font20,
                   ),
                 ],
@@ -186,7 +186,7 @@ class CartPage extends StatelessWidget {
                   padding: EdgeInsets.only(top: Dimensions.height15, bottom: Dimensions.height15, right: Dimensions.width35, left: Dimensions.width35,),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimensions.radius20),
-                    color: AppColors.mainColor,
+                    color: AppColors.main_Color,
                   ),
                   child: GestureDetector(
                       onTap: (){

@@ -49,25 +49,25 @@ class _HomePageState extends State<HomePage> {
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.home),
         title: ("Home"),
-        activeColorPrimary: CupertinoColors.activeBlue,
+        activeColorPrimary: AppColors.main_Color,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.archivebox_fill),
         title: ("Archive"),
-        activeColorPrimary: CupertinoColors.activeBlue,
+        activeColorPrimary: AppColors.main_Color,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.cart_fill),
         title: ("Cart"),
-        activeColorPrimary: CupertinoColors.activeBlue,
+        activeColorPrimary: AppColors.main_Color,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.person),
         title: ("Me"),
-        activeColorPrimary: CupertinoColors.activeBlue,
+        activeColorPrimary: AppColors.main_Color,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
     ];

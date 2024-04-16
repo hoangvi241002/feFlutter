@@ -59,7 +59,7 @@ class RecommendedMedicalItemDetail extends StatelessWidget {
                           right:0, top:0,
                             child: AppIcon(icon: Icons.circle, size: Dimensions.font20,
                               iconColor: Colors.transparent,
-                              backgroundColor: AppColors.mainColor,),
+                              backgroundColor: AppColors.main_Color,),
                         ):
                         Container(),
                         Get.find<PopularProductController>().totalItems >= 1?
@@ -135,7 +135,7 @@ class RecommendedMedicalItemDetail extends StatelessWidget {
                     child: AppIcon(
                         iconSize: Dimensions.iconSize24,
                         iconColor: Colors.white,
-                        backgroundColor: AppColors.mainColor,
+                        backgroundColor: AppColors.main_Color,
                         icon: Icons.remove
                     ),
                   ),
@@ -147,7 +147,7 @@ class RecommendedMedicalItemDetail extends StatelessWidget {
                     child: AppIcon(
                         iconSize: Dimensions.iconSize24,
                         iconColor: Colors.white,
-                        backgroundColor: AppColors.mainColor,
+                        backgroundColor: AppColors.main_Color,
                         icon: Icons.add
                     ),
                   )
@@ -175,7 +175,7 @@ class RecommendedMedicalItemDetail extends StatelessWidget {
                     ),
                     child: Icon(
                       Icons.favorite,
-                      color: AppColors.mainColor,
+                      color: AppColors.main_Color,
                       size: Dimensions.iconSize30,
                     ),
                   ),
@@ -188,7 +188,7 @@ class RecommendedMedicalItemDetail extends StatelessWidget {
                       child: BigText(text: "${product.price!} | Add To Cart", color: Colors.white, size: Dimensions.font20,),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(Dimensions.radius20),
-                        color: AppColors.mainColor,
+                        color: AppColors.main_Color,
                       ),
                     ),
                   )

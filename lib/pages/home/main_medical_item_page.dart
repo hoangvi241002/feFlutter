@@ -31,7 +31,7 @@ class _MainMedicalItemPageState extends State<MainMedicalItemPage> {
                   children: [
                     Column(
                       children: [
-                        BigText(text: "Việt Nam", color: AppColors.mainColor,),
+                        BigText(text: "Việt Nam", color: AppColors.main_Color,),
                         Row(
                           children: [
                             Container(
@@ -57,7 +57,7 @@ class _MainMedicalItemPageState extends State<MainMedicalItemPage> {
                         child: Icon(Icons.search, color: Colors.white, size: Dimensions.iconSize24),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(Dimensions.radius15),
-                          color: AppColors.mainColor,
+                          color: AppColors.main_Color,
                         ),
                       ),
                     )
