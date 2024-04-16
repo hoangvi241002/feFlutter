@@ -34,6 +34,8 @@ class CartController extends GetxController {
       }
     } else {
       if(quantity>0){
+        //thêm cặp key – value vào HashMap. Nếu key không chứa trong HashMap sẽ được thêm mới,
+        //nếu key đã tồn tại thì value sẽ được update thành value mới được truyền vào.
         _items.putIfAbsent(product.id!, () {
           // print("adding item to the cart "+product.id!.toString()+" quantity "+quantity.toString());
           // _items.forEach((key, value) {
@@ -86,9 +88,19 @@ class CartController extends GetxController {
     return totalQuantity;
   }
 
+  // tất cả thuộc tính này sẽ tạo danh sách giỏ hàng và trả về dưới dạng list
   List<CartModel> get getItems{
     return _items.entries.map((e){
       return e.value;
     }).toList();
+  }
+
+  // tính tổng tiền của sản phẩm trong giỏ hàng
+  int get totalAmount{
+    var total = 0;
+    _items.forEach((key, value) {
+      total += value.quantity! * value.price!;
+    });
+    return total;
   }
 }

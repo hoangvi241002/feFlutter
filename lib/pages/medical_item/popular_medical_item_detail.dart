@@ -21,8 +21,9 @@ import '../../widgets/icon_and_text_widget.dart';
 import '../../widgets/small_text.dart';
 
 class PopularMedicalItemDetail extends StatelessWidget {
-  int pageId;
-  PopularMedicalItemDetail({super.key, required this.pageId});
+  final int pageId;
+  final String page;
+  const PopularMedicalItemDetail({super.key, required this.pageId, required this.page});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +60,11 @@ class PopularMedicalItemDetail extends StatelessWidget {
                children: [
                  GestureDetector(
                    onTap: (){
-                     Get.toNamed(RouteHelper.getInitial());
+                     if(page=='cartpage'){
+                       Get.toNamed(RouteHelper.getCartPage());
+                     } else {
+                       Get.toNamed(RouteHelper.getInitial());
+                     }
                    },
                    child:
                     AppIcon(icon: Icons.arrow_back_ios)),

@@ -107,7 +107,7 @@ class _MedicalPageBodyState extends State<MedicalItemPageBody> {
               itemBuilder: (context, index){
                 return GestureDetector(
                   onTap: (){
-                    Get.toNamed(RouteHelper.getRecommendedMedicalItem(index));
+                    Get.toNamed(RouteHelper.getRecommendedMedicalItem(index, 'home'));
                   },
                   child: Container(
                       margin: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20, bottom: Dimensions.height10),
@@ -209,7 +209,7 @@ class _MedicalPageBodyState extends State<MedicalItemPageBody> {
         children: [
           GestureDetector(
             onTap: (){
-              Get.toNamed(RouteHelper.getPopularMedicalItem(index));
+              Get.toNamed(RouteHelper.getPopularMedicalItem(index, 'home'));
             },
             child: Container(
               height: Dimensions.pageViewContainer,

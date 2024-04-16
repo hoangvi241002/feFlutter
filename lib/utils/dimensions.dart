@@ -48,4 +48,7 @@ class Dimensions{
 
   // popular item
   static double popularItemImgSize = screenHeight/2.53;
+
+  // splash page
+  static double splashImg = screenHeight/3.52;
 }

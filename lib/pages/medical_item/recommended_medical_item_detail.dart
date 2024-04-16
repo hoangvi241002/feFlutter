@@ -16,7 +16,8 @@ import '../../routes/route_helper.dart';
 
 class RecommendedMedicalItemDetail extends StatelessWidget {
   final int pageId;
-  const RecommendedMedicalItemDetail({super.key, required this.pageId});
+  final String page;
+  const RecommendedMedicalItemDetail({super.key, required this.pageId, required this.page});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,11 @@ class RecommendedMedicalItemDetail extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: (){
-                    Get.toNamed(RouteHelper.getInitial());
+                    if(page=='cartpage'){
+                      Get.toNamed(RouteHelper.getCartPage());
+                    } else {
+                      Get.toNamed(RouteHelper.getInitial());
+                    }
                   },
                   child: AppIcon(icon: Icons.clear),
                 ),
