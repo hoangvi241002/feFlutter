@@ -46,8 +46,8 @@ class PopularProductController extends GetxController {
   }
   int checkQuantity(int quantity){
     if((_inCartItems+quantity)<0){
-      Get.snackbar("Item Count", "Đây là mức tối thiểu rồi!",
-        backgroundColor: AppColors.mainColor,
+      Get.snackbar("Thông Báo", "Đây là mức tối thiểu rồi!",
+        backgroundColor: AppColors.main_Color,
         colorText: Colors.white,
       );
       if(_inCartItems > 0){
@@ -56,8 +56,8 @@ class PopularProductController extends GetxController {
       }
       return 0;
     } else if ((_inCartItems+quantity)>10){
-      Get.snackbar("Item Count", "Đây là mức tối đa rồi!",
-        backgroundColor: AppColors.mainColor,
+      Get.snackbar("Thông Báo", "Đây là mức tối đa rồi!",
+        backgroundColor: AppColors.main_Color,
         colorText: Colors.white,
       );
       return 10;

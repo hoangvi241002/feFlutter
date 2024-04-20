@@ -54,8 +54,8 @@ class CartController extends GetxController {
             product: product,
           );});
       } else {
-        Get.snackbar("Item Count", "Bạn nên thêm ít nhất một sản phẩm",
-        backgroundColor: AppColors.mainColor,
+        Get.snackbar("Thông Báo", "Bạn nên thêm ít nhất một sản phẩm",
+        backgroundColor: AppColors.main_Color,
             colorText: Colors.white,
         );
       }
@@ -119,5 +119,26 @@ class CartController extends GetxController {
     for(int i = 0; i < storageItems.length; i++){
       _items.putIfAbsent(storageItems[i].product!.id!, () => storageItems[i]);
     }
+  }
+  void addToHistory(){
+    cartRepo.addToCartHistoryList();
+    clear();
+  }
+  void clear(){
+    _items = {};
+    update();
+  }
+
+  List<CartModel> getCartHistoryList(){
+    return cartRepo.getCartHistoryList();
+  }
+
+  set setItems(Map<int, CartModel> setItems){
+    _items = {};
+    _items = setItems;
+  }
+  void addToCartList(){
+    cartRepo.addToCartList(getItems);
+    update();
   }
 }

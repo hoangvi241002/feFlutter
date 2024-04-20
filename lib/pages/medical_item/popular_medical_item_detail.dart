@@ -67,17 +67,17 @@ class PopularMedicalItemDetail extends StatelessWidget {
                      }
                    },
                    child:
-                    AppIcon(icon: Icons.arrow_back)),
+                    AppIcon(icon: Icons.arrow_back, backgroundColor: Colors.transparent, iconColor: AppColors.main_Color, iconSize: Dimensions.font23,)),
 
                  GetBuilder<PopularProductController>(builder: (controller){
                    return GestureDetector(
                      onTap: (){
-                       if(controller.totalItems >= 1)
+                       if(controller.totalItems >= 0)
                         Get.toNamed(RouteHelper.getCartPage());
                      },
                      child: Stack(
                        children: [
-                         AppIcon(icon: Icons.shopping_cart_outlined),
+                         AppIcon(icon: Icons.shopping_cart_outlined, backgroundColor: Colors.transparent, iconColor: AppColors.main_Color, iconSize: Dimensions.font23,),
                          Get.find<PopularProductController>().totalItems >= 1?
                             Positioned(
                               right:0, top:0,

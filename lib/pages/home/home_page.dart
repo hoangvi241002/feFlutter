@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:khoaluan_flutter/pages/cart/cart_history.dart';
 import 'package:khoaluan_flutter/utils/colors.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
@@ -39,7 +40,7 @@ class _HomePageState extends State<HomePage> {
     return [
       MainMedicalItemPage(),
       Container(child: Center(child: Text("Next 1 Page")),),
-      Container(child: Center(child: Text("Next 2 Page")),),
+      CartHistory(),
       Container(child: Center(child: Text("Next 3 Page")),)
     ];
   }
