@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:khoaluan_flutter/base/show_custom_snackbar.dart';
+import 'package:khoaluan_flutter/controller/auth_controller.dart';
+import 'package:khoaluan_flutter/models/signup_body_model.dart';
 import 'package:khoaluan_flutter/utils/colors.dart';
 import 'package:khoaluan_flutter/utils/dimensions.dart';
 import 'package:khoaluan_flutter/widgets/app_text_field.dart';
@@ -20,6 +24,44 @@ class SignUpPage extends StatelessWidget {
       "f2.png",
       "g.png"
     ];
+
+    void _registration(){
+      var authController = Get.find<AuthController>();
+
+      String email = emailController.text.trim();
+      String password = passwordController.text.trim();
+      String name = nameController.text.trim();
+      String phone = phoneController.text.trim();
+
+      if(email.isEmpty){
+        showCustomSnackBar("Email không được để trống", title: "Thông Báo");
+      } else if (!GetUtils.isEmail(email)){
+        showCustomSnackBar("Email nhập vào không hợp lệ", title: "Thông Báo");
+      } else if (password.isEmpty){
+        showCustomSnackBar("Mật khẩu không được để trống", title: "Thông Báo");
+      } else if (password.length<6){
+        showCustomSnackBar("Mật khẩu không thể ít hơn 6 kí tự", title: "Thông Báo");
+      } else if (name.isEmpty){
+        showCustomSnackBar("Tên không được để trống", title: "Thông Báo");
+      } else if (phone.isEmpty){
+        showCustomSnackBar("Số điện thoại không được để trống", title: "Thông Báo");
+      } else {
+        showCustomSnackBar("Yêu cầu đã được chấp thuận", title: "Perfect");
+        SignUpBody signUpBody = SignUpBody(
+            email: email,
+            password: password,
+            name: name,
+            phone: phone
+        );
+        authController.registration(signUpBody).then((status){
+          if(status.isSuccess){
+            print("Success Registration!");
+          } else {
+            showCustomSnackBar(status.message);
+          }
+        });
+      }
+    }
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -54,14 +96,19 @@ class SignUpPage extends StatelessWidget {
             SizedBox(height: Dimensions.height20,),
 
             // Sign up button
-            Container(
-              width: Dimensions.screenWidth/2,
-              height: Dimensions.screenHeight/13,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.radius30),
-                color: AppColors.main_Color,
+            GestureDetector(
+              onTap: (){
+                _registration();
+              },
+              child: Container(
+                width: Dimensions.screenWidth/2,
+                height: Dimensions.screenHeight/13,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.radius30),
+                  color: AppColors.main_Color,
+                ),
+                child: Center(child: BigText(text: "Đăng Kí", size: Dimensions.font26, color: Colors.white,)),
               ),
-              child: Center(child: BigText(text: "Đăng Kí", size: Dimensions.font26, color: Colors.white,)),
             ),
             SizedBox(height: Dimensions.height10,),
             // Tag line
