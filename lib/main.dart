@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:khoaluan_flutter/controller/cart_controller.dart';
 import 'package:khoaluan_flutter/controller/popular_product_controller.dart';
+import 'package:khoaluan_flutter/pages/auth/sign_in_page.dart';
+import 'package:khoaluan_flutter/pages/auth/sign_up_page.dart';
 import 'package:khoaluan_flutter/pages/home/main_medical_item_page.dart';
 import 'package:khoaluan_flutter/pages/home/medical_item_page_body.dart';
 import 'package:khoaluan_flutter/pages/medical_item/popular_medical_item_detail.dart';
@@ -33,9 +35,9 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          // home: SplashScreen(),
-          initialRoute: RouteHelper.getSplashPage(),
-          getPages: RouteHelper.routes,
+          home: SignInPage(),
+          // initialRoute: RouteHelper.getSplashPage(),
+          // getPages: RouteHelper.routes,
         );
       });
     });

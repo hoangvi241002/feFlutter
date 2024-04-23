@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:khoaluan_flutter/pages/account/account_page.dart';
+import 'package:khoaluan_flutter/pages/auth/sign_up_page.dart';
 import 'package:khoaluan_flutter/pages/cart/cart_history.dart';
 import 'package:khoaluan_flutter/utils/colors.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -39,9 +41,9 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _buildScreens() {
     return [
       MainMedicalItemPage(),
-      Container(child: Center(child: Text("Next 1 Page")),),
+      SignUpPage(),
       CartHistory(),
-      Container(child: Center(child: Text("Next 3 Page")),)
+      AccountPage(),
     ];
   }
 
