@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:khoaluan_flutter/base/no_data_page.dart';
+import 'package:khoaluan_flutter/controller/auth_controller.dart';
 import 'package:khoaluan_flutter/controller/cart_controller.dart';
 import 'package:khoaluan_flutter/controller/popular_product_controller.dart';
 import 'package:khoaluan_flutter/pages/home/main_medical_item_page.dart';
@@ -202,10 +203,11 @@ class CartPage extends StatelessWidget {
                   ),
                   child: GestureDetector(
                       onTap: (){
-                        // popularProduct.addItem(product);
-                        print("tapped");
-                        cartController.addToHistory();
-                        Get.toNamed(RouteHelper.getInitial());
+                        if(Get.find<AuthController>().userLoggedIn()){
+                          cartController.addToHistory();
+                        } else {
+                          Get.toNamed(RouteHelper.getSignInPage());
+                        }
                       },
                       child: BigText(text: "Check out", color: Colors.white, size: Dimensions.font20,)),
                 ),
