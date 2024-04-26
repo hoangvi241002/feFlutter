@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -5,7 +6,9 @@ import 'package:get/get.dart';
 import 'package:khoaluan_flutter/base/no_data_page.dart';
 import 'package:khoaluan_flutter/controller/auth_controller.dart';
 import 'package:khoaluan_flutter/controller/cart_controller.dart';
+import 'package:khoaluan_flutter/controller/location_controller.dart';
 import 'package:khoaluan_flutter/controller/popular_product_controller.dart';
+import 'package:khoaluan_flutter/pages/cart/cart_history.dart';
 import 'package:khoaluan_flutter/pages/home/main_medical_item_page.dart';
 import 'package:khoaluan_flutter/routes/route_helper.dart';
 import 'package:khoaluan_flutter/utils/app_constants.dart';
@@ -204,7 +207,12 @@ class CartPage extends StatelessWidget {
                   child: GestureDetector(
                       onTap: (){
                         if(Get.find<AuthController>().userLoggedIn()){
-                          cartController.addToHistory();
+                          print("Logged in?");
+                          if(Get.find<LocationController>().addressList.isEmpty){
+                            Get.toNamed(RouteHelper.getAddressPage());
+                          } else {
+                            Get.offNamed(RouteHelper.getCartPage());
+                          }
                         } else {
                           Get.toNamed(RouteHelper.getSignInPage());
                         }

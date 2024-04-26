@@ -35,6 +35,9 @@ dependencies:
   persistent_bottom_nav_bar: ^5.0.2
   shared_preferences: ^2.2.3
   intl: ^0.19.0
+  google_maps_flutter: ^2.6.1
+  geocoding: ^3.0.0
+  geolocator: ^11.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

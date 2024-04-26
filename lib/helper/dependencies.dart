@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
 import 'package:khoaluan_flutter/controller/auth_controller.dart';
 import 'package:khoaluan_flutter/controller/cart_controller.dart';
+import 'package:khoaluan_flutter/controller/location_controller.dart';
 import 'package:khoaluan_flutter/data/api/api_client.dart';
 import 'package:khoaluan_flutter/data/repository/auth_repo.dart';
 import 'package:khoaluan_flutter/data/repository/cart_repo.dart';
+import 'package:khoaluan_flutter/data/repository/location_repo.dart';
 import 'package:khoaluan_flutter/data/repository/popular_product_repo.dart';
 import 'package:khoaluan_flutter/utils/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,10 +29,15 @@ Future <void> init()async {
   Get.lazyPut(() => RecommendedProductRepo(apiClient: Get.find()));
   Get.lazyPut(() => CartRepo(sharedPreferences: Get.find()));
 
+  Get.lazyPut(() => LocationRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
+
   // controllers
   Get.lazyPut(() => AuthController(authRepo: Get.find()));
   Get.lazyPut(() => UserController(userRepo: Get.find()));
+
   Get.lazyPut(() => PopularProductController(popularProductRepo: Get.find()));
   Get.lazyPut(() => RecommendedProductController(recommendedProductRepo: Get.find()));
   Get.lazyPut(() => CartController(cartRepo: Get.find()));
+
+  Get.lazyPut(() => LocationController(locationRepo: Get.find()));
 }
