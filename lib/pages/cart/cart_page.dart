@@ -208,10 +208,12 @@ class CartPage extends StatelessWidget {
                       onTap: (){
                         if(Get.find<AuthController>().userLoggedIn()){
                           print("Logged in?");
+                          // cartController.addToHistory();
                           if(Get.find<LocationController>().addressList.isEmpty){
                             Get.toNamed(RouteHelper.getAddressPage());
                           } else {
-                            Get.offNamed(RouteHelper.getCartPage());
+                            cartController.addToHistory();
+                            Get.offNamed(RouteHelper.getInitial());
                           }
                         } else {
                           Get.toNamed(RouteHelper.getSignInPage());

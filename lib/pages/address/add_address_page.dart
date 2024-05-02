@@ -5,6 +5,7 @@ import 'package:khoaluan_flutter/controller/auth_controller.dart';
 import 'package:get/get.dart';
 import 'package:khoaluan_flutter/controller/location_controller.dart';
 import 'package:khoaluan_flutter/models/address_model.dart';
+import 'package:khoaluan_flutter/pages/address/pick_address_map.dart';
 import 'package:khoaluan_flutter/routes/route_helper.dart';
 import 'package:khoaluan_flutter/utils/colors.dart';
 import 'package:khoaluan_flutter/utils/dimensions.dart';
@@ -28,31 +29,37 @@ class _AddAddressPageState extends State<AddAddressPage> {
   final TextEditingController _contactPersonNumber = TextEditingController();
 
   late bool _isLogged;
-  CameraPosition _cameraPosition = const CameraPosition(target: LatLng(
-    10.8163722, 106.6355253
-  ), zoom: 17);
-  late LatLng _initialPosition = LatLng(
-      10.8163722, 106.6355253
-  );
+  late CameraPosition _cameraPosition;
+  late LatLng _initialPosition;
+
+  // CameraPosition _cameraPosition = const CameraPosition(target: LatLng(
+  //   10.8163722, 106.6355253
+  // ), zoom: 17);
+  // late LatLng _initialPosition = LatLng(
+  //     10.8163722, 106.6355253
+  // );
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _isLogged = Get.find<AuthController>().userLoggedIn();
-    if(_isLogged&&Get.find<UserController>().userModel==null){
+    if (_isLogged && Get.find<UserController>().userModel == null) {
       Get.find<UserController>().getUserInfo();
     }
-    if(Get.find<LocationController>().addressList.isNotEmpty){
+    if (Get.find<LocationController>().addressList.isNotEmpty) {
+      if (Get.find<LocationController>().getUserAddressFromLocalStorage() == "") {
+        Get.find<LocationController>().saveUserAddress(
+            Get.find<LocationController>().addressList.last
+        );
+      }
+
       Get.find<LocationController>().getUserAddress();
-      _cameraPosition = CameraPosition(target: LatLng(
-        double.parse(Get.find<LocationController>().getAddress["latitude"]),
-        double.parse(Get.find<LocationController>().getAddress["longitude"]),
-      ));
-      _initialPosition = LatLng(
-        double.parse(Get.find<LocationController>().getAddress["latitude"]),
-        double.parse(Get.find<LocationController>().getAddress["longitude"]),
-      );
+      LatLng position = LatLng(Get.find<LocationController>().position.latitude, Get.find<LocationController>().position.longitude);
+      _cameraPosition = CameraPosition(target: position, zoom: 17);
+      _initialPosition = position;
+    } else {
+      _cameraPosition = const CameraPosition(target: LatLng(10.8163722, 106.6355253), zoom: 17);
+      _initialPosition = LatLng(10.8163722, 106.6355253);
     }
   }
 
@@ -94,6 +101,15 @@ class _AddAddressPageState extends State<AddAddressPage> {
                   child: Stack(
                     children: [
                       GoogleMap(initialCameraPosition: CameraPosition(target: _initialPosition, zoom: 17),
+                        onTap: (latlng){
+                          Get.toNamed(RouteHelper.getPickAddressPage(),
+                            arguments: PickAddressMap(
+                              fromSignup: false,
+                              fromAddress: true,
+                              googleMapController: locationController.mapController,
+                            )
+                          );
+                        },
                         zoomControlsEnabled: false,
                         compassEnabled: false,
                         indoorViewEnabled: true,

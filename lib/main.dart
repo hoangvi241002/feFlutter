@@ -11,6 +11,7 @@ import 'package:khoaluan_flutter/pages/medical_item/popular_medical_item_detail.
 import 'package:khoaluan_flutter/pages/medical_item/recommended_medical_item_detail.dart';
 import 'package:khoaluan_flutter/pages/splash/splash_page.dart';
 import 'package:khoaluan_flutter/routes/route_helper.dart';
+import 'package:khoaluan_flutter/utils/colors.dart';
 import 'controller/recommended_product_controller.dart';
 import 'helper/dependencies.dart' as dep;
 Future<void> main() async {
@@ -31,13 +32,14 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
+
           // home: SignInPage(),
           initialRoute: RouteHelper.getSplashPage(),
           getPages: RouteHelper.routes,
+          theme: ThemeData(
+            primaryColor: AppColors.main_Color,
+            useMaterial3: true,
+          ),
         );
       });
     });
