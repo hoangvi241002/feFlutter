@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:get/get.dart';
-import 'package:khoaluan_flutter/base/custom.button.dart';
+import 'package:khoaluan_flutter/base/custom_button.dart';
 import 'package:khoaluan_flutter/controller/location_controller.dart';
 import 'package:khoaluan_flutter/pages/address/widgets/search_location_page.dart';
 import 'package:khoaluan_flutter/routes/route_helper.dart';

@@ -41,8 +41,7 @@ class SearchLocationPage extends StatelessWidget {
                   ),
                   hintStyle: Theme.of(context).textTheme.displayMedium?.copyWith(
                       color: Theme.of(context).textTheme.bodyLarge?.color,
-                      fontSize: Dimensions.font16
-                  ),
+                      fontSize: Dimensions.font16),
                 )
               ),
               itemBuilder: (context, Prediction suggestion) {

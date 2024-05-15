@@ -3,10 +3,12 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:khoaluan_flutter/controller/cart_controller.dart';
 import 'package:khoaluan_flutter/controller/popular_product_controller.dart';
+import 'package:khoaluan_flutter/controller/search_product_controller.dart';
 import 'package:khoaluan_flutter/pages/auth/sign_in_page.dart';
 import 'package:khoaluan_flutter/pages/auth/sign_up_page.dart';
 import 'package:khoaluan_flutter/pages/home/main_medical_item_page.dart';
 import 'package:khoaluan_flutter/pages/home/medical_item_page_body.dart';
+import 'package:khoaluan_flutter/pages/home/widgets/search_page.dart';
 import 'package:khoaluan_flutter/pages/medical_item/popular_medical_item_detail.dart';
 import 'package:khoaluan_flutter/pages/medical_item/recommended_medical_item_detail.dart';
 import 'package:khoaluan_flutter/pages/splash/splash_page.dart';
@@ -31,9 +33,8 @@ class MyApp extends StatelessWidget {
       return GetBuilder<RecommendedProductController>(builder: (_){
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
 
-          // home: SignInPage(),
+          // home: SearchPage(),
           initialRoute: RouteHelper.getSplashPage(),
           getPages: RouteHelper.routes,
           theme: ThemeData(

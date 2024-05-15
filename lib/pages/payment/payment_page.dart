@@ -1,24 +1,25 @@
 import 'dart:async';
-
+import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:khoaluan_flutter/controller/order_controller.dart';
+import 'package:khoaluan_flutter/models/order_model.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../routes/route_helper.dart';
 import '../../utils/app_constants.dart';
 import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
+import '../../widgets/big_text.dart';
 
 class PaymentPage extends StatefulWidget {
   final OrderModel orderModel;
-  PaymentPage({required this.orderModel});
+  const PaymentPage({super.key, required this.orderModel});
 
   @override
-  _PaymentPageState createState() => _PaymentPageState();
+  State<PaymentPage> createState() => _PaymentPageState();
 }
-
 class _PaymentPageState extends State<PaymentPage> {
   late String selectedUrl;
   double value = 0.0;
@@ -31,66 +32,57 @@ class _PaymentPageState extends State<PaymentPage> {
   void initState() {
     super.initState();
     selectedUrl = '${AppConstants.BASE_URL}/payment-mobile?customer_id=${widget.orderModel.userId}&order_id=${widget.orderModel.id}';
-    //selectedUrl="https://mvs.bslmeiyu.com";
-    // if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => _exitApp(context),
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Text("Payment"),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
-            onPressed:()=> _exitApp(context),
-          ),
-          backgroundColor: AppColors.mainColor,
-        ),
-        body: Center(
-          child: Container(
-            width: Dimensions.screenWidth,
-            child: Stack(
-              children: [
-                WebView(
-                  javascriptMode: JavascriptMode.unrestricted,
-                  initialUrl: selectedUrl,
-                  gestureNavigationEnabled: true,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.main_Color,
+        title: Text("Payment", style: TextStyle(color: Colors.white),),
+      ),
+      body: Center(
+        child: Container(
+          width: Dimensions.screenWidth,
+          child: Stack(
+            children: [
+              WebView(
+                javascriptMode: JavascriptMode.unrestricted,
+                initialUrl: selectedUrl,
+                gestureNavigationEnabled: true,
 
-                  userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13E233 Safari/601.1',
-                  onWebViewCreated: (WebViewController webViewController) {
-                    _controller.future.then((value) => controllerGlobal = value);
-                    _controller.complete(webViewController);
-                    //_controller.future.catchError(onError)
-                  },
-                  onProgress: (int progress) {
-                    print("WebView is loading (progress : $progress%)");
-                  },
-                  onPageStarted: (String url) {
-                    print('Page started loading: $url');
-                    setState(() {
-                      _isLoading = true;
-                    });
-                    print("printing urls "+url.toString());
-                    _redirect(url);
+                userAgent: 'Mozilla/5.0 (Linux; Android 13; Pixel 6 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Mobile Safari/537.36',
+                onWebViewCreated: (WebViewController webViewController){
+                  _controller.future.then((value) => controllerGlobal = value);
+                  _controller.complete(webViewController);
+                },
 
-                  },
-                  onPageFinished: (String url) {
-                    print('Page finished loading: $url');
-                    setState(() {
-                      _isLoading = false;
-                    });
-                    _redirect(url);
+                onProgress: (int progress) {
+                  print("Webview is loading (progress: $progress%)");
+                },
 
-                  },
-                ),
-                _isLoading ? Center(
-                  child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor)),
-                ) : SizedBox.shrink(),
-              ],
-            ),
+                onPageStarted: (String url){
+                  print('Page started loading: $url');
+                  setState(() {
+                    _isLoading = true;
+                  });
+                  print("printing urls "+url.toString());
+                  _redirect(url);
+                },
+
+                onPageFinished: (String url) {
+                  print('Page finished loading: $url');
+                  setState(() {
+                    _isLoading = false;
+                  });
+                  _redirect(url);
+
+                },
+              ),
+              _isLoading ? Center(
+                child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor)),
+              ) : SizedBox.shrink(),
+            ],
           ),
         ),
       ),
@@ -107,24 +99,12 @@ class _PaymentPageState extends State<PaymentPage> {
         _canRedirect = false;
       }
       if (_isSuccess) {
-        Get.offNamed(RouteHelper.getOrderSuccessRoute(widget.orderModel.id.toString(), 'success'));
+        Get.offNamed(RouteHelper.getOrderSuccessPage(widget.orderModel.id.toString(), 'success'));
       } else if (_isFailed || _isCancel) {
-        Get.offNamed(RouteHelper.getOrderSuccessRoute(widget.orderModel.id.toString(), 'fail'));
+        Get.offNamed(RouteHelper.getOrderSuccessPage(widget.orderModel.id.toString(), 'fail'));
       }else{
         print("Encountered problem");
       }
     }
   }
-
-  Future<bool> _exitApp(BuildContext context) async {
-    if (await controllerGlobal.canGoBack()) {
-      controllerGlobal.goBack();
-      return Future.value(false);
-    } else {
-      print("app exited");
-      return true;
-      // return Get.dialog(PaymentFailedDialog(orderID: widget.orderModel.id.toString()));
-    }
-  }
-
 }

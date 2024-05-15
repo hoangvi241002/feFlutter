@@ -9,7 +9,7 @@ class AddressModel {
 
   AddressModel({
     id,
-    addressType,
+    required addressType,
     contactPersonName,
     contactPersonNumber,
     address,

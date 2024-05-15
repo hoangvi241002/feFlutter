@@ -66,12 +66,8 @@ class CartRepo{
     for(int i = 0; i < cart.length; i++){
       cartHistory.add(cart[i]);
     }
-    removeCart();
+    cart = [];
     sharedPreferences.setStringList(AppConstants.CART_HISTORY_LIST, cartHistory);
-    print("độ dài của historyList là " + getCartHistoryList().length.toString());
-    for(int j = 0; j < getCartHistoryList().length; j++){
-      print("thời gian đã đặt hàng là " + getCartHistoryList()[j].time.toString());
-    }
   }
   void removeCart(){
     cart = [];
@@ -81,6 +77,11 @@ class CartRepo{
   void clearCartHistory(){
     removeCart();
     cartHistory = [];
+    sharedPreferences.remove(AppConstants.CART_HISTORY_LIST);
+  }
+
+  void removeCartSharedPreference() {
+    sharedPreferences.remove(AppConstants.CART_LIST);
     sharedPreferences.remove(AppConstants.CART_HISTORY_LIST);
   }
 }

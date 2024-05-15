@@ -40,7 +40,7 @@ class AccountPage extends StatelessWidget {
                   children: [
                     // profile icon
                     AppIcon(
-                      icon: Icons.person_add_alt_1,
+                      icon: Icons.person,
                       backgroundColor: AppColors.main_Color,
                       iconColor: Colors.white,
                       iconSize: Dimensions.iconSize75,
@@ -53,7 +53,7 @@ class AccountPage extends StatelessWidget {
                           children: [
                             // name
                             AccountWidget(
-                              bigText: BigText(text: userController.userModel.name),
+                              bigText: BigText(text: userController.userModel!.name),
                               appIcon: AppIcon(
                                 icon: Icons.person,
                                 backgroundColor: AppColors.main_Color,
@@ -65,7 +65,7 @@ class AccountPage extends StatelessWidget {
                             SizedBox(height: Dimensions.height20,),
                             // phone
                             AccountWidget(
-                              bigText: BigText(text: userController.userModel.phone),
+                              bigText: BigText(text: userController.userModel!.phone),
                               appIcon: AppIcon(
                                 icon: Icons.phone_android,
                                 backgroundColor: AppColors.yellowColor,
@@ -77,7 +77,7 @@ class AccountPage extends StatelessWidget {
                             SizedBox(height: Dimensions.height20,),
                             // email
                             AccountWidget(
-                              bigText: BigText(text: userController.userModel.email),
+                              bigText: BigText(text: userController.userModel!.email),
                               appIcon: AppIcon(
                                 icon: Icons.email_outlined,
                                 backgroundColor: AppColors.iconColor2,

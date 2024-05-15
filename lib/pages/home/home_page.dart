@@ -4,6 +4,7 @@ import 'package:khoaluan_flutter/pages/account/account_page.dart';
 import 'package:khoaluan_flutter/pages/auth/sign_in_page.dart';
 import 'package:khoaluan_flutter/pages/auth/sign_up_page.dart';
 import 'package:khoaluan_flutter/pages/cart/cart_history.dart';
+import 'package:khoaluan_flutter/pages/order/order_page.dart';
 import 'package:khoaluan_flutter/utils/colors.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
@@ -42,7 +43,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _buildScreens() {
     return [
       MainMedicalItemPage(),
-      Container(child: Text("history page"),),
+      OrderPage(),
       CartHistory(),
       AccountPage(),
     ];
@@ -96,11 +97,11 @@ class _HomePageState extends State<HomePage> {
       ),
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
-      itemAnimationProperties: ItemAnimationProperties( // Navigation Bar's items animation properties.
+      itemAnimationProperties: const ItemAnimationProperties( // Navigation Bar's items animation properties.
         duration: Duration(milliseconds: 200),
         curve: Curves.ease,
       ),
-      screenTransitionAnimation: ScreenTransitionAnimation( // Screen transition animation on change of selected tab.
+      screenTransitionAnimation: const ScreenTransitionAnimation( // Screen transition animation on change of selected tab.
         animateTabTransition: true,
         curve: Curves.ease,
         duration: Duration(milliseconds: 200),

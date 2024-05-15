@@ -23,4 +23,16 @@ class RecommendedProductController extends GetxController {
 
     }
   }
+
+  Future<void> searchProducts(String keyword) async {
+    Response response = await recommendedProductRepo.searchProducts(keyword);
+    if (response.statusCode == 200) {
+      _recommendedProductList = [];
+      _recommendedProductList.addAll(Product.fromJson(response.body).products);
+      _isLoaded = true;
+      update();
+    } else {
+      // Xử lý lỗi nếu cần
+    }
+  }
 }

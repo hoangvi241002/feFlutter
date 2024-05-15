@@ -62,15 +62,21 @@ class CartHistory extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: Dimensions.height10*10,
+            height: Dimensions.height10*10+7,
             color: AppColors.main_Color,
             width: double.maxFinite,
             padding: EdgeInsets.only(top: Dimensions.height45),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                BigText(text: "Cart History", color: Colors.white,),
-                AppIcon(icon: Icons.shopping_cart_outlined, iconColor: AppColors.main_Color, backgroundColor: Colors.white,),
+                BigText(text: "Lịch Sử Đặt Hàng", color: Colors.white,),
+                GestureDetector(
+                    onTap: (){
+                      Get.toNamed(RouteHelper.getCartPage());
+                    },
+                    child: AppIcon(icon: Icons.shopping_cart_outlined,
+                      iconColor: AppColors.main_Color,
+                      backgroundColor: Colors.white,)),
               ],
             ),
           ),

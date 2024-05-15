@@ -221,7 +221,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                       );
                       locationController.addAddress(_addressModel).then((response){
                         if(response.isSuccess){
-                          Get.toNamed(RouteHelper.getInitial());
+                          Get.toNamed(RouteHelper.getCartPage());
                           Get.snackbar("Thông báo", "Đã thêm địa chỉ thành công");
                         } else {
                           Get.snackbar("Thông báo", "Không thể lưu địa chỉ");

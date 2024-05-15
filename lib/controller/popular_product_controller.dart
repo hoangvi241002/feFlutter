@@ -98,4 +98,17 @@ class PopularProductController extends GetxController {
   List<CartModel> get getItems {
     return _cart.getItems;
   }
+
+  Future<void> searchProducts(String keyword) async {
+    Response response = await popularProductRepo.searchProducts(keyword);
+    if (response.statusCode == 200) {
+      _popularProductList = [];
+      _popularProductList.addAll(Product.fromJson(response.body).products);
+      _isLoaded = true;
+      update();
+    } else {
+      // Xử lý lỗi nếu cần
+    }
+  }
+
 }
