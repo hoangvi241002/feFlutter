@@ -11,7 +11,7 @@ class SearchWidget extends StatelessWidget {
   final TextInputType? keyboardType;
   final TextEditingController? controller;
   final void Function()? onEditingComplete;
-  final bool obscureText;
+  // final bool obscureText;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final String? Function(String?)? validator;
@@ -21,7 +21,7 @@ class SearchWidget extends StatelessWidget {
     this.keyboardType,
     this.controller,
     this.onEditingComplete,
-    required this.obscureText,
+    // required this.obscureText,
     this.suffixIcon,
     this.validator,
     this.prefixIcon, this.hintText});
@@ -41,7 +41,7 @@ class SearchWidget extends StatelessWidget {
             controller: controller,
             keyboardType: keyboardType,
             onEditingComplete: onEditingComplete,
-            obscureText: obscureText ?? false,
+            // obscureText: obscureText ?? false,
             style: TextStyle(
               color: Colors.grey,
               fontSize: Dimensions.font16,

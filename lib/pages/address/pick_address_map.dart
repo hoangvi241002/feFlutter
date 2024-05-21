@@ -55,7 +55,6 @@ class _PickAddressMapState extends State<PickAddressMap> {
                   GoogleMap(initialCameraPosition: CameraPosition(
                       target: _initialPosition, zoom: 17
                   ),
-                    zoomControlsEnabled: false,
                     onCameraMove: (CameraPosition cameraPosition){
                       _cameraPosition = cameraPosition;
                     },

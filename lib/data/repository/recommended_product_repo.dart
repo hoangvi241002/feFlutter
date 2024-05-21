@@ -9,8 +9,4 @@ class RecommendedProductRepo extends GetxService {
   Future <Response> getRecommendedProductList() async{
     return await apiClient.getData(AppConstants.RECOMMENDED_PRODUCT_URI);
   }
-
-  Future<Response> searchProducts(String keyword) async {
-    return await apiClient.getData('${AppConstants.SEARCH_PRODUCT_URI}?keyword=$keyword');
-  }
 }

@@ -97,15 +97,15 @@ class LocationController extends GetxController implements GetxService {
 
       if (placemarks.isNotEmpty) {
         Placemark placemark = placemarks.first;
-        // Get the detailed address components
+        // Lấy chi tiết từng thành phần của địa chỉ
         String street = placemark.street ?? '';
         // String subThoroughfare = placemark.subThoroughfare ?? '';
         // String locality = placemark.locality ?? '';
         String administrativeArea = placemark.administrativeArea ?? '';
-        String country = placemark.country ?? '';
+        // String country = placemark.country ?? '';
 
         // Build the full address string
-        address = '$street, $administrativeArea, $country';
+        address = '$street, $administrativeArea';
       } else {
         print('Error getting geocode');
       }
@@ -128,6 +128,42 @@ class LocationController extends GetxController implements GetxService {
       print(e);
     }
     return _addressModel;
+  }
+
+  // Hàm lấy thành phố từ tọa độ địa lý
+  Future<String> getCityFromGeocode(LatLng latLng) async {
+    String city = 'Unknown city';
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+        latLng.latitude,
+        latLng.longitude,
+      );
+      if (placemarks.isNotEmpty) {
+        Placemark placemark = placemarks.first;
+        city = placemark.subAdministrativeArea ?? 'Unknown city';
+      }
+    } catch (e) {
+      print("Error getting city from geocode: $e");
+    }
+    return city;
+  }
+
+  // Hàm lấy quốc gia từ tọa độ địa lý
+  Future<String> getCountryFromGeocode(LatLng latLng) async {
+    String country = 'Unknown country';
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+        latLng.latitude,
+        latLng.longitude,
+      );
+      if (placemarks.isNotEmpty) {
+        Placemark placemark = placemarks.first;
+        country = placemark.country ?? 'Unknown country';
+      }
+    } catch (e) {
+      print("Error getting country from geocode: $e");
+    }
+    return country;
   }
 
   final List<String> _addressTypeList = ["home", "office", "others"];

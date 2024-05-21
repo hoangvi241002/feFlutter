@@ -39,7 +39,7 @@ class CustomButton extends StatelessWidget {
         width: width ?? Dimensions.screenWidth,
         height: height ?? Dimensions.height45,
         child: TextButton(
-          onPressed: onPressed,
+          onPressed: () => onPressed,
           style: _flatButton,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

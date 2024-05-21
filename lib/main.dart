@@ -8,7 +8,7 @@ import 'package:khoaluan_flutter/pages/auth/sign_in_page.dart';
 import 'package:khoaluan_flutter/pages/auth/sign_up_page.dart';
 import 'package:khoaluan_flutter/pages/home/main_medical_item_page.dart';
 import 'package:khoaluan_flutter/pages/home/medical_item_page_body.dart';
-import 'package:khoaluan_flutter/pages/home/widgets/search_page.dart';
+import 'package:khoaluan_flutter/pages/home/search_page.dart';
 import 'package:khoaluan_flutter/pages/medical_item/popular_medical_item_detail.dart';
 import 'package:khoaluan_flutter/pages/medical_item/recommended_medical_item_detail.dart';
 import 'package:khoaluan_flutter/pages/splash/splash_page.dart';

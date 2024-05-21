@@ -9,8 +9,4 @@ class PopularProductRepo extends GetxService {
   Future <Response> getPopularProductList() async{
     return await apiClient.getData(AppConstants.POPULAR_PRODUCT_URI);
   }
-
-  Future<Response> searchProducts(String keyword) async {
-    return await apiClient.getData('${AppConstants.SEARCH_PRODUCT_URI}?keyword=$keyword');
-  }
 }

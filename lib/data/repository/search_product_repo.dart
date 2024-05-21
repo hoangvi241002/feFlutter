@@ -20,10 +20,4 @@ class SearchProductRepo {
   Future<Response> searchProducts(String keyword) async {
     return await apiClient.getData('${AppConstants.SEARCH_PRODUCT_URI}?keyword=$keyword');
   }
-
-  // Tìm kiếm sản phẩm theo từ khóa
-  // List<ProductModel> searchProducts(String keyword) {
-  //   List<ProductModel> allProducts = _getAllProducts();
-  //   return allProducts.where((product) => product.name!.toLowerCase().contains(keyword.toLowerCase())).toList();
-  // }
 }

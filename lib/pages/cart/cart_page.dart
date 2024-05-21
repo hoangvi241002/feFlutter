@@ -337,15 +337,15 @@ class CartPage extends StatelessWidget {
                                   cart:cart,
                                   orderAmount: cartController.totalAmount.toDouble(),
                                   orderNote: orderController.note,
+                                  distance: 10.0,
                                   address: location.address,
                                   latitude: location.latitude,
                                   longitude: location.longitude,
-                                  contactPersonNumber: user!.phone,
-                                  contactPersonName: user.name,
-                                  scheduleAt: 'hello',
-                                  distance: 10.0,
+                                  contactPersonName: user!.name,
+                                  contactPersonNumber: user.phone,
                                   orderType: orderController.orderType,
                                   paymentMethod: orderController.paymentIndex == 0 ? 'cash_on_delivery' : 'digital_payment',
+                                  scheduleAt: 'hello',
                                 );
                                 // print(placeOrder.toJson());
                                 // return;
