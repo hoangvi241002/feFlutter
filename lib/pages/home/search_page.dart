@@ -30,7 +30,9 @@ class _SearchPageState extends State<SearchPage> {
             keyboardType: TextInputType.text,
             hintText: "Tìm kiếm sản phẩm",
             suffixIcon: GestureDetector(
-              onTap: (){}, child: Icon(Icons.search_outlined, color: AppColors.main_Color,),
+              onTap: (){
+
+              }, child: Icon(Icons.search_outlined, color: AppColors.main_Color,),
             ),
           ),
         ),

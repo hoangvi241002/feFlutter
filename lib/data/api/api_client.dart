@@ -15,7 +15,9 @@ class ApiClient extends GetConnect implements GetxService {
     token = sharedPreferences.getString(AppConstants.TOKEN)??"";
     _mainHeaders = {
       'Content-type': 'application/json; charset=UTF-8',
-      'Authorization': 'Bearer $token'
+      'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Methods': '*',
+      'Access-Control-Allow-Origin': '*'
     };
   }
 

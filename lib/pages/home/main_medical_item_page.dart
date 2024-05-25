@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:khoaluan_flutter/controller/search_product_controller.dart';
 import 'package:khoaluan_flutter/widgets/big_text.dart';
 import 'package:khoaluan_flutter/widgets/small_text.dart';
 import 'package:khoaluan_flutter/utils/colors.dart';
@@ -18,11 +20,14 @@ class MainMedicalItemPage extends StatefulWidget {
 }
 
 class _MainMedicalItemPageState extends State<MainMedicalItemPage> {
+  // String get keyword => "";
+
   @override
   void initState() {
     super.initState();
     _loadResource();
     Get.find<LocationController>().getUserAddress();
+    // Get.find<SearchProductController>().searchProducts(keyword);
   }
 
   Future<void> _loadResource() async {
@@ -47,22 +52,32 @@ class _MainMedicalItemPageState extends State<MainMedicalItemPage> {
               children: [
                 GetBuilder<LocationController>(builder: (locationController) {
                   return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       BigText(
                         text: 'Việt Nam',
                         color: AppColors.main_Color
                       ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: Dimensions.width10),
-                            child: SmallText(
-                              text: locationController.placemark.name ??
-                                  'Chưa thêm địa chỉ',
-                              color: Colors.black54,
+                      GestureDetector(
+                        onTap: (){
+                          Get.toNamed(RouteHelper.getAddressPage());
+                        } ,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: Dimensions.width10/2),
+                              child: Text(
+                                locationController.placemark.name ?? 'Chưa thêm địa chỉ',
+                                style: TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: Dimensions.font12
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   );
