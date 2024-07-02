@@ -32,6 +32,10 @@ import '../order/payment_option_button.dart';
 class CartPage extends StatelessWidget {
 
   double exchangeRate = 25500;
+  double deliveryChargeRate = 40;
+  double totalAmount = Get.find<CartController>().totalAmount.toDouble();
+  late double deliveryCharge = totalAmount / deliveryChargeRate.toDouble() + 200000;
+
   double convertCurrencyVNDtoUSD(int vndAmount) {
     return vndAmount / exchangeRate;
   }
@@ -153,7 +157,7 @@ class CartPage extends StatelessWidget {
                                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           children: [
                                             BigText(text: cartController.getItems[index].name!, color: Colors.black54,),
-                                            SmallText(text: "đừng mua"),
+                                            SizedBox(height: Dimensions.height10,),
                                             Row(
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
@@ -276,7 +280,7 @@ class CartPage extends StatelessWidget {
                                             ),
                                             AppTextField(
                                               textController: _noteController,
-                                              hintText: '', icon: Icons.note_alt_outlined,
+                                              hintText: 'Viết ghi chú', icon: Icons.note_alt_outlined,
                                             )
                                           ],
                                         ),
@@ -335,6 +339,7 @@ class CartPage extends StatelessWidget {
                                 PlaceOrderBody placeOrder = PlaceOrderBody(
                                   cart:cart,
                                   orderAmount: cartController.totalAmount.toDouble(),
+                                  deliveryCharge: deliveryCharge,
                                   orderNote: orderController.note,
                                   distance: 10.0,
                                   address: location.address,

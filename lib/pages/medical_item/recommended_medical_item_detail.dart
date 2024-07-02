@@ -185,7 +185,7 @@ class RecommendedMedicalItemDetail extends StatelessWidget {
                     },
                     child: Container(
                       padding: EdgeInsets.only(top: Dimensions.height15, bottom: Dimensions.height15, right: Dimensions.width20, left: Dimensions.width20,),
-                      child: BigText(text: "${product.price!} | Add To Cart", color: Colors.white, size: Dimensions.font20,),
+                      child: BigText(text: "${product.price!} | Thêm giỏ hàng", color: Colors.white, size: Dimensions.font20,),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(Dimensions.radius20),
                         color: AppColors.main_Color,

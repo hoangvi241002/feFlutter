@@ -32,7 +32,6 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Center(child: Text("Tình Trạng Đơn Hàng", style: TextStyle(color: Colors.white),)),
@@ -40,30 +39,39 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
       ),
       body: Column(
         children: [
-          Container(
-            width: Dimensions.screenWidth,
-            child: TabBar(
-              indicatorColor: Theme.of(context).primaryColor,
-              indicatorWeight: 3,
-              labelColor: Theme.of(context).primaryColor,
-              unselectedLabelColor: Theme.of(context).disabledColor,
-              controller: _tabController,
-              tabs: const [
-                Tab(text: "Đang Giao Hàng",),
-                Tab(text: "Đã Giao Hàng",),
-              ],
+          if (_isLoggedIn) // Kiểm tra _isLoggedIn trước khi sử dụng _tabController
+            Container(
+              width: Dimensions.screenWidth,
+              child: TabBar(
+                indicatorColor: Theme.of(context).primaryColor,
+                indicatorWeight: 3,
+                labelColor: Theme.of(context).primaryColor,
+                unselectedLabelColor: Theme.of(context).disabledColor,
+                controller: _tabController,
+                tabs: const [
+                  Tab(text: "Đơn hàng đã đặt",),
+                  Tab(text: "Chờ giao hàng",),
+                ],
+              ),
             ),
-          ),
           Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: const [
-                ViewOrder(isCurrent: true),
-                ViewOrder(isCurrent: false)
-            ]),
+            child: _isLoggedIn
+                ? TabBarView(
+                    controller: _tabController,
+                    children: const [
+                      ViewOrder(isCurrent: true),
+                      ViewOrder(isCurrent: false)
+                    ],
+                  )
+                : Center(
+                    child: Text("Bạn cần đăng nhập để xem đơn hàng.", style: TextStyle(
+                      fontSize: Dimensions.font20, color: AppColors.signColor
+                    ),),
+            ),
           )
         ],
-      )
+      ),
     );
   }
+
 }

@@ -16,6 +16,12 @@ import 'package:khoaluan_flutter/widgets/big_text.dart';
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
 
+  bool isValidEmail(String email) {
+    // Biểu thức chính quy để kiểm tra email
+    final RegExp emailRegex = RegExp(r'^[\w-\.]+@((gmail\.com)|(vanlanguni\.vn))$');
+    return emailRegex.hasMatch(email);
+  }
+
   @override
   Widget build(BuildContext context) {
     var emailController = TextEditingController();
@@ -27,34 +33,33 @@ class SignUpPage extends StatelessWidget {
       "g.png"
     ];
 
-    void _registration(AuthController authController){
-
+    void _registration(AuthController authController) {
       String email = emailController.text.trim();
       String password = passwordController.text.trim();
       String name = nameController.text.trim();
       String phone = phoneController.text.trim();
 
-      if(email.isEmpty){
+      if (email.isEmpty) {
         showCustomSnackBar("Email không được để trống", title: "Thông Báo");
-      } else if (!GetUtils.isEmail(email)){
+      } else if (!isValidEmail(email)) {
         showCustomSnackBar("Email nhập vào không hợp lệ", title: "Thông Báo");
-      } else if (password.isEmpty){
+      } else if (password.isEmpty) {
         showCustomSnackBar("Mật khẩu không được để trống", title: "Thông Báo");
-      } else if (password.length<6){
+      } else if (password.length < 6) {
         showCustomSnackBar("Mật khẩu không thể ít hơn 6 kí tự", title: "Thông Báo");
-      } else if (name.isEmpty){
+      } else if (name.isEmpty) {
         showCustomSnackBar("Tên không được để trống", title: "Thông Báo");
-      } else if (phone.isEmpty){
+      } else if (phone.isEmpty) {
         showCustomSnackBar("Số điện thoại không được để trống", title: "Thông Báo");
       } else {
         SignUpBody signUpBody = SignUpBody(
-            email: email,
-            password: password,
-            name: name,
-            phone: phone
+          email: email,
+          password: password,
+          name: name,
+          phone: phone,
         );
-        authController.registration(signUpBody).then((status){
-          if(status.isSuccess){
+        authController.registration(signUpBody).then((status) {
+          if (status.isSuccess) {
             Get.offNamed(RouteHelper.getInitial());
           } else {
             showCustomSnackBar(status.message);
@@ -62,6 +67,7 @@ class SignUpPage extends StatelessWidget {
         });
       }
     }
+
 
     return Scaffold(
       backgroundColor: Colors.white,

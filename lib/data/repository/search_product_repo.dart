@@ -1,23 +1,13 @@
-import 'dart:convert';
-import 'package:get/get_connect/http/src/response/response.dart';
-import 'package:khoaluan_flutter/utils/app_constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../../models/products_model.dart';
-import '../api/api_client.dart';
+import 'package:get/get.dart';
+import 'package:khoaluan_flutter/data/api/api_client.dart'; // API Client để gọi API từ server
+import 'package:khoaluan_flutter/utils/app_constants.dart'; // Các hằng số của ứng dụng
 
-class SearchProductRepo {
-  final SharedPreferences sharedPreferences;
+class SearchProductRepo extends GetxService {
   final ApiClient apiClient;
 
-  SearchProductRepo({required this.sharedPreferences, required this.apiClient});
-
-  // Lấy tất cả các sản phẩm từ SharedPreferences
-  List<ProductModel> _getAllProducts() {
-    List<String> products = sharedPreferences.getStringList(AppConstants.SEARCH_PRODUCT_URI) ?? [];
-    return products.map((product) => ProductModel.fromJson(jsonDecode(product))).toList();
-  }
+  SearchProductRepo({required this.apiClient});
 
   Future<Response> searchProducts(String keyword) async {
-    return await apiClient.getData('${AppConstants.SEARCH_PRODUCT_URI}?keyword=$keyword');
+    return await apiClient.getData('${AppConstants.BASE_URL}/api/v1/products/search?keyword=$keyword'); // Gọi API tìm kiếm
   }
 }

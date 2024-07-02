@@ -1,17 +1,14 @@
 import 'dart:async';
-import 'package:get/get.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:khoaluan_flutter/controller/order_controller.dart';
-import 'package:khoaluan_flutter/models/order_model.dart';
+import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
+import 'package:flutter_paypal/flutter_paypal.dart';
 import '../../routes/route_helper.dart';
 import '../../utils/app_constants.dart';
 import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
 import '../../widgets/big_text.dart';
+import 'package:khoaluan_flutter/models/order_model.dart';
 
 class PaymentPage extends StatefulWidget {
   final OrderModel orderModel;
@@ -20,6 +17,7 @@ class PaymentPage extends StatefulWidget {
   @override
   State<PaymentPage> createState() => _PaymentPageState();
 }
+
 class _PaymentPageState extends State<PaymentPage> {
   late String selectedUrl;
   double value = 0.0;
@@ -38,73 +36,74 @@ class _PaymentPageState extends State<PaymentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.main_Color,
-        title: Text("Payment", style: TextStyle(color: Colors.white),),
+        title: Text("Thanh toán bằng Paypal"),
       ),
       body: Center(
-        child: Container(
-          width: Dimensions.screenWidth,
-          child: Stack(
-            children: [
-              WebView(
-                javascriptMode: JavascriptMode.unrestricted,
-                initialUrl: selectedUrl,
-                gestureNavigationEnabled: true,
-
-                userAgent: 'Mozilla/5.0 (Linux; Android 13; Pixel 6 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Mobile Safari/537.36',
-                onWebViewCreated: (WebViewController webViewController){
-                  _controller.future.then((value) => controllerGlobal = value);
-                  _controller.complete(webViewController);
-                },
-
-                onProgress: (int progress) {
-                  print("Webview is loading (progress: $progress%)");
-                },
-
-                onPageStarted: (String url){
-                  print('Page started loading: $url');
-                  setState(() {
-                    _isLoading = true;
-                  });
-                  print("printing urls "+url.toString());
-                  _redirect(url);
-                },
-
-                onPageFinished: (String url) {
-                  print('Page finished loading: $url');
-                  setState(() {
-                    _isLoading = false;
-                  });
-                  _redirect(url);
-
-                },
-              ),
-              _isLoading ? Center(
-                child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor)),
-              ) : SizedBox.shrink(),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => UsePaypal(
+                      sandboxMode: true,
+                      clientId: AppConstants.clientId,
+                      secretKey: AppConstants.secretKey,
+                      returnURL: AppConstants.returnURL,
+                      cancelURL: AppConstants.cancelURL,
+                      transactions: const [
+                        {
+                          "amount": {
+                            "total": '10.12',
+                            "currency": "USD",
+                            "details": {
+                              "subtotal": '10.12',
+                              "shipping": '0',
+                              "shipping_discount": 0
+                            }
+                          },
+                          "description":
+                          "The payment transaction description.",
+                          "item_list": {
+                            "items": [
+                              {
+                                "name": "A demo product",
+                                "quantity": 1,
+                                "price": '10.12',
+                                "currency": "USD"
+                              }
+                            ],
+                            "shipping_address": {
+                              "recipient_name": "Jane Foster",
+                              "line1": "Travis County",
+                              "line2": "",
+                              "city": "Austin",
+                              "country_code": "US",
+                              "postal_code": "73301",
+                              "phone": "+00000000",
+                              "state": "Texas"
+                            },
+                          }
+                        }
+                      ],
+                      note: "Contact us for any questions on your order.",
+                      onSuccess: (Map params) async {
+                        print("onSuccess: $params");
+                      },
+                      onError: (error) {
+                        print("onError: $error");
+                      },
+                      onCancel: (params) {
+                        print('cancelled: $params');
+                      }),
+                ),
+              );
+            },
+              child: Text("Thanh toán ngay với Paypal"))
+          ],
         ),
       ),
     );
   }
 
-  void _redirect(String url) {
-    print("redirect");
-    if(_canRedirect) {
-      bool _isSuccess = url.contains('success') && url.contains(AppConstants.BASE_URL);
-      bool _isFailed = url.contains('fail') && url.contains(AppConstants.BASE_URL);
-      bool _isCancel = url.contains('cancel') && url.contains(AppConstants.BASE_URL);
-      if (_isSuccess || _isFailed || _isCancel) {
-        _canRedirect = false;
-      }
-      if (_isSuccess) {
-        Get.offNamed(RouteHelper.getOrderSuccessPage(widget.orderModel.id.toString(), 'success'));
-      } else if (_isFailed || _isCancel) {
-        Get.offNamed(RouteHelper.getOrderSuccessPage(widget.orderModel.id.toString(), 'fail'));
-      }else{
-        print("Encountered problem");
-      }
-    }
-  }
 }

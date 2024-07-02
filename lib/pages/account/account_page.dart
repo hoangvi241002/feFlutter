@@ -28,7 +28,7 @@ class AccountPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.main_Color,
-        title: Center(child: BigText(text: "Profile", size: Dimensions.font26, color: Colors.white,)),
+        title: Center(child: BigText(text: "Thông tin cá nhân", size: Dimensions.font26, color: Colors.white,)),
       ),
       body: GetBuilder<UserController>(builder: (userController){
         return _userLoggedIn
@@ -126,7 +126,7 @@ class AccountPage extends StatelessWidget {
                             SizedBox(height: Dimensions.height20,),
                             // message
                             AccountWidget(
-                              bigText: BigText(text: "Message",),
+                              bigText: BigText(text: "Liên hệ",),
                               appIcon: AppIcon(
                                 icon: Icons.message,
                                 backgroundColor: AppColors.main_Color,

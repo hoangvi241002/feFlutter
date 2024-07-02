@@ -33,10 +33,10 @@ class AddressModel {
   String get longitude => _longitude;
 
   AddressModel.fromJson(Map<String, dynamic> json){
-    _id = json["id"];
-    _addressType = json["addressType"]??"";
-    _contactPersonName = json["contactPersonName"]??"";
-    _contactPersonNumber = json["contactPersonNumber"]??"";
+    _id = json["id"] != null ? int.tryParse(json["id"].toString()) : null;
+    _addressType = json["addressType"] ?? "";
+    _contactPersonName = json["contactPersonName"] ?? "";
+    _contactPersonNumber = json["contactPersonNumber"] ?? "";
     _address = json["address"];
     _latitude = json["latitude"];
     _longitude = json["longitude"];

@@ -42,6 +42,11 @@ class LocationController extends GetxController implements GetxService {
   // save the gg map suggestion for address
   List<Prediction> _predictionList = [];
 
+  // Thêm một phương thức để kiểm tra xem có địa chỉ nào được lưu hay không
+  bool hasSavedAddress() {
+    return placemark.name != null;
+  }
+
   void setMapController(GoogleMapController mapController){
     _mapController = mapController;
   }

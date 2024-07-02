@@ -67,7 +67,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Address Page", style: TextStyle(color: Colors.white),),
+        title: Text("Thêm địa chỉ ở đây", style: TextStyle(color: Colors.white),),
         backgroundColor: AppColors.main_Color, centerTitle: true,
       ),
       body: GetBuilder<UserController>(builder: (userController){

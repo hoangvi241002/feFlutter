@@ -153,7 +153,7 @@ class PopularMedicalItemDetail extends StatelessWidget {
                     onTap: (){
                       popularProduct.addItem(product);
                     },
-                    child: BigText(text: "${product.price!} | Add To Cart", color: Colors.white, size: Dimensions.font20,)),
+                    child: BigText(text: "${product.price!} | Thêm giỏ hàng", color: Colors.white, size: Dimensions.font20,)),
               ),
             ],
           ),

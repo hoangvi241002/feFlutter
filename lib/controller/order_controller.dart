@@ -10,8 +10,8 @@ class OrderController extends GetxController implements GetxService{
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  late List<OrderModel> _currentOrderList;
-  late List<OrderModel> _historyOrderList;
+  late List<OrderModel> _currentOrderList = [];
+  late List<OrderModel> _historyOrderList = [];
 
   List<OrderModel> get currentOrderList => _currentOrderList;
   List<OrderModel> get historyOrderList => _historyOrderList;
@@ -26,7 +26,7 @@ class OrderController extends GetxController implements GetxService{
   String get note => _note;
 
   Future<void> placeOrder(PlaceOrderBody placeOrder, Function callback) async {
-    _isLoading = true;
+    _isLoading = false;
     Response response = await orderRepo.placeOrder(placeOrder);
     if(response.statusCode == 200){
       _isLoading = false;
@@ -54,9 +54,9 @@ class OrderController extends GetxController implements GetxService{
             orderModel.orderStatus == 'handover'||
             orderModel.orderStatus == 'picked_up'
         ){
-          _currentOrderList.add(orderModel);
-        } else {
           _historyOrderList.add(orderModel);
+        } else {
+          _currentOrderList.add(orderModel);
         }
       });
     } else {
@@ -64,8 +64,8 @@ class OrderController extends GetxController implements GetxService{
       _historyOrderList = [];
     }
     _isLoading = false;
-    print("The length of the orders " + _currentOrderList.length.toString());
-    print("The length of the orders " + _historyOrderList.length.toString());
+    print("The length of the orders current " + _currentOrderList.length.toString());
+    print("The length of the orders history " + _historyOrderList.length.toString());
     update();
   }
 

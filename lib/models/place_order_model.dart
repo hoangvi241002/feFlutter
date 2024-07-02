@@ -3,6 +3,7 @@ import 'cart_model.dart';
 class PlaceOrderBody {
   List<CartModel>? _cart;
   late double _orderAmount;
+  late double _deliveryCharge;
   late String _orderNote;
   late double _distance;
   late String _address;
@@ -16,6 +17,7 @@ class PlaceOrderBody {
   PlaceOrderBody(
       {required List<CartModel> cart,
         required double orderAmount,
+        required double deliveryCharge,
         required double distance,
         required String scheduleAt,
         required String orderNote,
@@ -30,6 +32,7 @@ class PlaceOrderBody {
       }){
     this._cart = cart;
     this._orderAmount = orderAmount;
+    this._deliveryCharge = deliveryCharge;
     this._orderNote = orderNote;
     this._distance = distance;
     this._address = address;
@@ -44,6 +47,7 @@ class PlaceOrderBody {
   List<CartModel> get cart => _cart!;
 
   double get orderAmount => _orderAmount;
+  double get deliveryCharge => _deliveryCharge;
 
   String get orderNote => _orderNote;
 
@@ -64,6 +68,7 @@ class PlaceOrderBody {
     }
 
     _orderAmount = json['order_amount'];
+    _deliveryCharge = json['delivery_charge'];
 
     _orderNote = json['order_note'];
 
@@ -83,6 +88,7 @@ class PlaceOrderBody {
       data['cart'] = this._cart!.map((v) => v.toJson()).toList();
     }
     data['order_amount'] = this._orderAmount;
+    data['delivery_charge'] = this._deliveryCharge;
     data['order_note'] = this._orderNote;
     data['distance'] = this._distance;
     data['address'] = this._address;

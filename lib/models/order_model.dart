@@ -57,8 +57,8 @@ class OrderModel {
       });
 
   OrderModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    userId = json['user_id'];
+    id = json['id'] != null ? int.tryParse(json['id'].toString()) ?? 0 : 0;
+    userId = json['user_id'] != null ? int.tryParse(json['user_id'].toString()) ?? 0 : 0;
     orderAmount = json['order_amount'].toDouble();
     paymentStatus = json['payment_status']??"pending";
     totalTaxAmount =100.0;

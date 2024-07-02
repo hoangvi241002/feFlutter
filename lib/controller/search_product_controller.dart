@@ -1,49 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:khoaluan_flutter/data/api/api_checker.dart';
-import 'package:khoaluan_flutter/data/api/api_client.dart';
-import 'package:khoaluan_flutter/utils/app_constants.dart';
+import 'package:khoaluan_flutter/data/repository/search_product_repo.dart';
+import 'package:khoaluan_flutter/models/products_model.dart';
 
-import '../data/repository/search_product_repo.dart';
-import '../models/products_model.dart';
-import 'package:http/http.dart' as http;
+import '../models/search_model.dart';
 
 class SearchProductController extends GetxController {
   final SearchProductRepo searchProductRepo;
   SearchProductController({required this.searchProductRepo});
 
-  RxBool _isLoading = false.obs;
-  bool get isLoading => _isLoading.value;
+  RxBool isLoading = false.obs; // Biến để kiểm tra trạng thái loading
+  RxList<ProductModel> products = <ProductModel>[].obs; // Danh sách sản phẩm tìm kiếm
+  RxString searchKeyword = ''.obs;
 
-  set setLoading(bool value){
-    _isLoading.value = value;
-  }
-
-  List<ProductModel> _searchResults = [];
-  List<ProductModel> get searchResults => _searchResults;
-
-  Future<void> searchProducts(String keyword) async {
-    setLoading = true;
+  void search(String keyword) async {
+    isLoading.value = true; // Bắt đầu loading
     try {
-      Response response = await searchProductRepo.searchProducts(keyword);
-      if(response.statusCode == 200){
-        List<dynamic> body = response.body;
-        _searchResults = body.map((item) => ProductModel.fromJson(item)).toList();
+      var response = await searchProductRepo.searchProducts(keyword); // Gọi API tìm kiếm
+      if (response.statusCode == 200) {
+        products.value = Product.fromJson(response.body).products; // Lưu kết quả vào danh sách sản phẩm
       } else {
-        print("Lỗi ${response.statusText}");
-        Get.snackbar("Lỗi", "Không thể tìm kiếm sản phẩm: ${response.statusText}",
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-        );
+        products.clear(); // Xóa danh sách nếu không có kết quả
       }
-    } catch(e) {
-      Get.snackbar("Lỗi", "Không thể tìm kiếm sản phẩm: $e",
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
+    } catch (e) {
+      print('Error searching products: $e');
+      products.clear(); // Xóa danh sách nếu có lỗi xảy ra
     } finally {
-      setLoading = false;
-      update();
+      isLoading.value = false; // Kết thúc loading
     }
   }
 }

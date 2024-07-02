@@ -45,7 +45,7 @@ class DeliveryOptions extends StatelessWidget {
         Text(title),
         SizedBox(height: Dimensions.height10,),
         Text(
-          '(${(value == 'Đến lấy hàng' || isFree)?'free':'${formatCurrencyVND(amount.toInt() ~/ 20)}'})',
+          '(${(value == 'Đến lấy hàng' || isFree)?'free':'${formatCurrencyVND(amount.toInt() ~/ 40 + 200000)}'})',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: Dimensions.font20),
         )
       ],

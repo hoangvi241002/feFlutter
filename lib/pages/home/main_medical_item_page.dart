@@ -7,6 +7,7 @@ import 'package:khoaluan_flutter/widgets/small_text.dart';
 import 'package:khoaluan_flutter/utils/colors.dart';
 import 'package:khoaluan_flutter/utils/dimensions.dart';
 
+import '../../controller/auth_controller.dart';
 import '../../controller/location_controller.dart';
 import '../../controller/popular_product_controller.dart';
 import '../../controller/recommended_product_controller.dart';
@@ -60,7 +61,15 @@ class _MainMedicalItemPageState extends State<MainMedicalItemPage> {
                       ),
                       GestureDetector(
                         onTap: (){
-                          Get.toNamed(RouteHelper.getAddressPage());
+                          if (Get.find<AuthController>().userLoggedIn() || Get.find<LocationController>().hasSavedAddress()) {
+                            // Kiểm tra xem người dùng đã đăng nhập hoặc có địa chỉ được lưu
+                            Get.toNamed(RouteHelper.getAddressPage());
+                          } else {
+                            Get.snackbar("Thông Báo", "Bạn cần đăng nhập để thêm địa chỉ",
+                                backgroundColor: AppColors.main_Color,
+                                colorText: Colors.white,
+                            );
+                          }
                         } ,
                         child: Row(
                           children: [

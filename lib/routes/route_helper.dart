@@ -83,7 +83,7 @@ class RouteHelper {
 
     )),
     GetPage(name: searchPage, page: (){
-      return SearchPage();
+      return SearchPage(searchProductRepo: Get.find());
     }),
 
     GetPage(name: addAddress, page: (){

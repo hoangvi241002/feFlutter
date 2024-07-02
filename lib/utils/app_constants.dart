@@ -4,6 +4,7 @@ class AppConstants {
 
   static const String BASE_URL = "http://10.0.2.2:8000";
   // static const String BASE_URL = "https://dbf.dbestech.com";
+  // static const String BASE_URL = "http://192.168.1.7:8001";
   static const String POPULAR_PRODUCT_URI = "/api/v1/products/popular";
   static const String RECOMMENDED_PRODUCT_URI = "/api/v1/products/recommended";
   static const String SEARCH_PRODUCT_URI = "/api/v1/products/search";
@@ -32,4 +33,9 @@ class AppConstants {
   static const String CART_LIST = "cart-list";
   static const String CART_HISTORY_LIST = "cart-history-list";
   // static const String SEARCH_PRODUCT_URI = "search";
+
+  static const String clientId = "AZQdFU9m3fKNTcccNS2vd26KKrL3Bza0360D65LJ6ssQMKLfa3dTUuhA9GMlCQVo09Lw8UGDiSBzvPSZ";
+  static const String secretKey = "EM_OAa3_v_3sxU60df-r2wji7dpX3qh1-Gab8jfzY2u4vKiqCVI-w1wsw763tfCAjHtG9mLOAZ7xdpas";
+  static const String returnURL = "https://samplesite.com/return";
+  static const String cancelURL = "https://samplesite.com/cancel";
 }
